@@ -7,10 +7,10 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px;scroll-behavior:smooth}
-body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f5f0f0;color:#2d3436;min-height:100vh;overflow-x:hidden}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f5f0f0;color:#2d3436;min-height:100dvh;overflow-x:hidden;-webkit-text-size-adjust:100%}
 
 /* ===== SCREENS ===== */
-.screen{display:none;min-height:100vh;padding:12px 20px;animation:fadeIn .4s ease}
+.screen{display:none;min-height:100dvh;padding:12px 16px;animation:fadeIn .4s ease}
 .screen.active{display:flex;flex-direction:column;align-items:center}
 @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 
@@ -26,9 +26,9 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f5f0f
 .btn-small{padding:8px 16px;font-size:.85rem;border-radius:8px}
 .btn-back{background:none;color:#6c757d;padding:8px 12px;border-radius:8px;border:none;cursor:pointer;font-family:inherit;font-size:.9rem}
 .btn-back:hover{background:rgba(0,0,0,.05)}
-.btn-group{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:10px}
+.btn-group{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:10px;width:100%}
 
-.container{width:100%;max-width:960px}
+.container{width:100%;max-width:960px;padding:0 4px}
 .card{background:#fff;border-radius:14px;padding:16px;box-shadow:0 4px 20px rgba(0,0,0,.07)}
 
 /* ===== HOME ===== */
@@ -70,11 +70,11 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f5f0f
 .ac-item:hover,.ac-item.hl{background:#fff0f0;color:#c41e2a}
 
 /* ===== CLASSROOM GRID ===== */
-.grid-area{text-align:center;position:relative}
+.grid-area{text-align:center;position:relative;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
 .board-tag,.wall-tag{font-size:.8rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:7px 22px;border-radius:8px;display:block;width:fit-content;margin:6px auto}
 .board-tag{background:#1e3a6e;color:#fff}
 .wall-tag{background:#795548;color:#fff}
-.grid-with-sides{display:flex;align-items:center;justify-content:center;gap:6px}
+.grid-with-sides{display:flex;align-items:center;justify-content:center;gap:6px;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
 .side-tag{writing-mode:vertical-rl;font-size:.7rem;font-weight:700;letter-spacing:2px;padding:12px 7px;border-radius:8px;color:#fff;white-space:nowrap}
 .door-tag{background:#795548}
 .window-tag{background:#1e3a6e}
@@ -184,7 +184,7 @@ body.dragging{overflow:hidden;touch-action:none;user-select:none;-webkit-user-se
 .vote-bar .vb-fill{height:8px;border-radius:4px;transition:width .3s}
 
 /* ===== LEADERBOARD ===== */
-.lb-table{width:100%;max-width:600px;border-collapse:collapse;margin:0 auto}
+.lb-table{width:100%;max-width:600px;border-collapse:collapse;margin:0 auto;display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
 .lb-table th{background:#1e3a6e;color:#fff;padding:12px;text-align:left;font-size:.85rem}
 .lb-table td{padding:10px 12px;border-bottom:1px solid #eee;font-size:.9rem}
 .lb-table tr:hover td{background:#f8f9fa}
@@ -204,20 +204,124 @@ body.dragging{overflow:hidden;touch-action:none;user-select:none;-webkit-user-se
 @keyframes cfall{0%{transform:translateY(0) rotate(0);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
 
 /* ===== RESPONSIVE ===== */
+
+/* Tablet */
 @media(max-width:700px){
-.grid{--sw:50px;--sh:42px;--g:3px;--aw:16px}
-.cell .nm{font-size:.5rem}
-.cell .num{font-size:.6rem}
-.hero h1{font-size:1.7rem}
-.r3x3{max-width:320px}
-.live-stats{gap:10px}
-.stat{min-width:90px;padding:8px 14px}
-.stat .val{font-size:1.4rem}
+  .screen{padding:10px 12px}
+  .grid{--sw:48px;--sh:40px;--g:3px;--aw:14px}
+  .cell .nm{font-size:.5rem}
+  .cell .num{font-size:.6rem}
+  .hero h1{font-size:1.5rem}
+  .hero p{font-size:.82rem}
+  .r3x3{max-width:300px;gap:4px}
+  .r-cell{padding:8px 4px}
+  .r-cell .lbl{font-size:.6rem}
+  .r-cell .ans{font-size:.72rem}
+  .live-stats{gap:8px}
+  .stat{min-width:85px;padding:6px 10px}
+  .stat .val{font-size:1.2rem}
+  .stat .lbl{font-size:.65rem}
+  .board-tag,.wall-tag{font-size:.7rem;padding:5px 16px;letter-spacing:2px}
+  .side-tag{font-size:.6rem;padding:10px 5px;letter-spacing:1px}
+  .day-lbl{font-size:.6rem}
+  .score-map{max-width:260px}
+  .score-map div{padding:7px 3px;font-size:.85rem}
+  .score-map div b{font-size:1rem}
+  .btn{padding:10px 20px;font-size:.88rem}
+  .btn-group{gap:8px}
+  .bank{max-height:200px;padding:8px;gap:6px}
+  .tag{padding:6px 10px;font-size:.78rem}
+  .popup{padding:20px;width:92%}
+  .lb-table th,.lb-table td{padding:8px 6px;font-size:.8rem}
+  .lb-table .dt{font-size:.7rem}
 }
+
+/* Phone standard (375-420px) */
 @media(max-width:420px){
-.grid{--sw:40px;--sh:36px;--g:2px;--aw:12px}
-.tag{padding:6px 10px;font-size:.75rem}
-.btn{padding:10px 20px;font-size:.9rem}
+  .screen{padding:8px 8px}
+  .grid{--sw:38px;--sh:34px;--g:2px;--aw:10px}
+  .cell .nm{font-size:.46rem}
+  .cell .num{font-size:.55rem}
+  .cell-nb .badge{font-size:.5rem;padding:1px 3px}
+  .hero{padding:10px 10px 6px}
+  .hero h1{font-size:1.3rem}
+  .hero p{font-size:.78rem}
+  .hero img{width:70px!important}
+  .card{padding:12px}
+  .rules{margin-bottom:6px}
+  .rules h3{font-size:.82rem}
+  .rules li{font-size:.78rem;padding:2px 0}
+  .rules li .ic{width:20px;font-size:.88rem}
+  .score-map{max-width:220px}
+  .score-map div{padding:5px 2px;font-size:.78rem}
+  .score-map div b{font-size:.92rem}
+  .live-stats{gap:6px}
+  .stat{min-width:75px;padding:5px 8px}
+  .stat .val{font-size:1.1rem}
+  .stat .lbl{font-size:.6rem}
+  .btn{padding:8px 14px;font-size:.82rem;border-radius:10px}
+  .btn-group{gap:6px}
+  .btn-back{font-size:.8rem;padding:6px 8px}
+  .tag{padding:5px 8px;font-size:.72rem;border-radius:8px;border-width:1.5px}
+  .bank{max-height:180px;padding:6px;gap:4px}
+  .bank-search{padding:8px 10px;font-size:.82rem}
+  .board-tag,.wall-tag{font-size:.65rem;padding:4px 12px;letter-spacing:1.5px;border-radius:6px}
+  .side-tag{font-size:.55rem;padding:8px 4px;letter-spacing:1px;border-radius:6px}
+  .day-lbl{font-size:.55rem;letter-spacing:0}
+  .steps{gap:4px;margin-bottom:10px}
+  .step{padding:5px 10px;font-size:.75rem}
+  .toast{padding:8px 12px;font-size:.82rem;margin-bottom:8px}
+  .r3x3{max-width:280px;gap:3px}
+  .r-cell{padding:6px 3px;border-radius:8px}
+  .r-cell .lbl{font-size:.55rem}
+  .r-cell .ans{font-size:.68rem}
+  .r-cell .fix{font-size:.6rem}
+  .r-cell .pt{font-size:.75rem}
+  .result-score{padding:16px}
+  .result-score .big{font-size:2.8rem}
+  .result-score .sub{font-size:1rem}
+  .result-score .stars{font-size:1.8rem;margin:4px 0}
+  .result-score .msg{font-size:.88rem}
+  .popup{padding:16px;width:94%;border-radius:14px}
+  .popup h3{font-size:1rem}
+  .lb-table th,.lb-table td{padding:6px 4px;font-size:.75rem}
+  .lb-table .dt{font-size:.65rem}
+  .lb-table .rk{width:28px}
+  #conLegend{font-size:.68rem;gap:6px}
+  .config-card input{padding:10px 12px;font-size:.85rem}
+  .config-card ol{font-size:.8rem;line-height:1.6}
+  .name-card h3{font-size:.95rem}
+  .name-card p{font-size:.8rem}
+  .name-input-wrap input{padding:10px 14px;font-size:.92rem}
+}
+
+/* Small phones (320-374px) */
+@media(max-width:374px){
+  .grid{--sw:33px;--sh:30px;--g:2px;--aw:8px}
+  .cell .nm{font-size:.42rem}
+  .cell .num{font-size:.5rem}
+  .cell-nb .badge{font-size:.45rem;padding:0 2px}
+  .hero h1{font-size:1.15rem}
+  .hero img{width:56px!important}
+  .stat{min-width:65px;padding:4px 6px}
+  .stat .val{font-size:1rem}
+  .btn{padding:7px 12px;font-size:.78rem}
+  .side-tag{font-size:.5rem;padding:6px 3px}
+  .tag{padding:4px 6px;font-size:.68rem}
+  .score-map{max-width:190px}
+  .score-map div{padding:4px 2px;font-size:.7rem}
+  .score-map div b{font-size:.82rem}
+  .r3x3{max-width:240px}
+  .step{padding:4px 8px;font-size:.68rem}
+}
+
+/* Landscape phone */
+@media(max-height:500px) and (orientation:landscape){
+  .screen{min-height:auto;padding:6px 10px}
+  .hero{padding:6px 10px 4px}
+  .hero img{width:50px!important}
+  .hero h1{font-size:1.2rem}
+  .grid{--sw:36px;--sh:30px;--g:2px;--aw:10px}
 }
 </style>
 </head>
