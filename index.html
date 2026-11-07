@@ -1102,7 +1102,7 @@ function renderConGrid(data){
       let nm=s.name;
       if(nm===EMPTY)nm=EMPTY_T;
       el.innerHTML=`<span class="num">${d}</span>`+(nm?`<span class="nm" title="${nm}">${nm}</span>`:'')
-        +(s.total>0?`<span class="num" style="font-size:.55rem;color:inherit">${s.confidence}% · ${s.total}P</span>`:'');
+        +(s.total>0?`<span class="num" style="font-size:.55rem;color:inherit">${s.confidence}%</span>`:'');
 
       el.onclick=()=>showSeatDetail(d,s);
       gg.appendChild(el);
