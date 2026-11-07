@@ -1,5 +1,5 @@
 /* ============================================================
-   NHỚ CHỖ NGỒI v2 — Google Apps Script Backend
+   TÌM VỀ GÓC BÀN XƯA v2 — Google Apps Script Backend
    ============================================================
    HƯỚNG DẪN:
    1. Tạo Google Sheet mới (trống)
@@ -25,7 +25,7 @@ function doGet(e) {
       case 'consensus':   result = getConsensus(); break;
       case 'leaderboard': result = getLeaderboard(); break;
       case 'names':       result = getNames(); break;
-      default: result = { ok: true, msg: 'Nhớ Chỗ Ngồi API v2' };
+      default: result = { ok: true, msg: 'Tìm Về Góc Bàn Xưa API v2' };
     }
   } catch (err) { result = { error: err.toString() }; }
   return ContentService.createTextOutput(JSON.stringify(result))
