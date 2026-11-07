@@ -86,34 +86,46 @@ function submitVotes(data) {
   });
 
   // Rebuild consensus & score
+  // Phương án B: chỉ tính ghế hợp lệ, quy đổi tỷ lệ × 18
   var consensus = rebuildConsensus();
-  var score = 0, bonus = 0, maxScore = 0;
+  var rawScore = 0, rawMax = 0, bonus = 0;
   var details = [];
+  var SCALE_MAX = 18;
 
   votes.forEach(function(v) {
+    // Boundary positions (targetSeat is null): auto-correct, not scored
+    if (!v.targetSeat) {
+      details.push({ seat: null, dir: v.direction, voted: v.votedName,
+                      matched: true, pts: 0, consensus: v.votedName,
+                      confidence: 100, auto: true });
+      return;
+    }
     if (!v.votedName || v.votedName === SKIP) {
       details.push({ seat: v.targetSeat, dir: v.direction, voted: null,
-                      matched: false, pts: 0, consensus: null, confidence: 0 });
+                      matched: false, pts: 0, consensus: null, confidence: 0, auto: false });
       return;
     }
     var pts = v.points || 1;
-    maxScore += pts;
+    rawMax += pts;
     var c = consensus[v.targetSeat];
     var matched = c && c.name === v.votedName;
     var earned = matched ? pts : 0;
-    score += earned;
+    rawScore += earned;
     if (matched && c.count === 2) bonus += 1;
     details.push({ seat: v.targetSeat, dir: v.direction, voted: v.votedName,
                     matched: matched, pts: earned,
                     consensus: c ? c.name : null,
-                    confidence: c ? c.confidence : 0 });
+                    confidence: c ? c.confidence : 0, auto: false });
   });
 
-  var total = score + bonus;
-  pSh.appendRow([now, sid, data.playerName, data.playerSeat, score, bonus, total]);
+  // Scale: (rawScore / rawMax) × 18, rounded
+  var scaledScore = rawMax > 0 ? Math.round(rawScore / rawMax * SCALE_MAX) : 0;
+  var total = scaledScore + bonus;
+  pSh.appendRow([now, sid, data.playerName, data.playerSeat, scaledScore, bonus, total]);
 
-  return { success: true, score: score, bonus: bonus, total: total,
-           maxScore: maxScore, details: details, consensus: consensus, sessionId: sid };
+  return { success: true, score: scaledScore, bonus: bonus, total: total,
+           maxScore: SCALE_MAX, rawScore: rawScore, rawMax: rawMax,
+           details: details, consensus: consensus, sessionId: sid };
 }
 
 /* --- Consensus --- */

@@ -514,7 +514,7 @@ body.dragging{overflow:hidden;touch-action:none;user-select:none;-webkit-user-se
 /* ============================================================
    CONFIG & CONSTANTS
    ============================================================ */
-const R=6,C=8,CFGKEY='ncho-cfg',MX=18;
+const R=6,C=8,CFGKEY='ncho-cfg',MX=18; // MX=18: phương án B quy đổi tỷ lệ
 const EMPTY='__E__',SKIP='__SKIP__';
 const EMPTY_T='Không có ai',SKIP_T='Không nhớ';
 const DIRS=[
@@ -965,9 +965,10 @@ async function submit(){
       direction:n.e,
       votedName:voted,
       points:n.p,
-      dirKey:n.key
+      dirKey:n.key,
+      isBoundary:!n.ok
     };
-  }).filter(v=>v.targetSeat!=null||v.votedName===EMPTY);
+  });
 
   const payload={
     action:'submit',
@@ -994,14 +995,16 @@ function showResult(res){
   go('result');
   const sc=document.getElementById('resScore');
   const tot=res.total||0,mx=res.maxScore||MX,bon=res.bonus||0;
+  const scaled=res.score||0;
   let st,ms;
-  if(tot>=16){st='🌟🌟🌟';ms='Xuất sắc! Trí nhớ tuyệt vời!'}
-  else if(tot>=12){st='⭐⭐⭐';ms='Rất giỏi! Bạn nhớ rất tốt!'}
-  else if(tot>=8){st='⭐⭐';ms='Khá lắm! Cố lên nào!'}
-  else if(tot>=4){st='⭐';ms='Cũng được! Thử lại nhé!'}
+  if(scaled>=16){st='🌟🌟🌟';ms='Xuất sắc! Trí nhớ tuyệt vời!'}
+  else if(scaled>=12){st='⭐⭐⭐';ms='Rất giỏi! Bạn nhớ rất tốt!'}
+  else if(scaled>=8){st='⭐⭐';ms='Khá lắm! Cố lên nào!'}
+  else if(scaled>=4){st='⭐';ms='Cũng được! Thử lại nhé!'}
   else{st='💪';ms=res.score===0&&!conCache?.totalPlayers?'Bạn là người đầu tiên! Điểm sẽ tăng khi có đồng thuận.':'Hãy thử lại!'}
   let bonusHtml=bon>0?`<div class="bonus-tag">🎁 Bonus đồng thuận: +${bon}</div>`:'';
-  sc.innerHTML=`<div class="big">${tot}</div><div class="sub">/ ${mx} điểm</div><div class="stars">${st}</div><div class="msg">${ms}</div>${bonusHtml}`;
+  let rawHtml=res.rawMax?`<div style="font-size:.8rem;color:#6c757d;margin-top:4px">Đúng ${res.rawScore||0}/${res.rawMax} điểm gốc → quy đổi ${scaled}/${mx}</div>`:'';
+  sc.innerHTML=`<div class="big">${tot}</div><div class="sub">/ ${mx} điểm</div><div class="stars">${st}</div><div class="msg">${ms}</div>${rawHtml}${bonusHtml}`;
   if(tot>=14)confetti();
 
   // 3x3 result grid
@@ -1014,6 +1017,14 @@ function showResult(res){
     if(!nb){c.innerHTML='—';gd.appendChild(c);continue}
     const det=details.find(d=>d.dir===nb.e);
     if(!det){c.innerHTML='—';gd.appendChild(c);continue}
+
+    // Auto boundary positions (wall/board/aisle)
+    if(det.auto){
+      c.classList.add('ok');
+      c.style.opacity='.6';
+      c.innerHTML=`<div class="lbl">${nb.e} ${nb.l}</div><div class="ans">🚫 Ngoài biên</div><div style="font-size:.85rem">✅ Auto</div>`;
+      gd.appendChild(c);continue;
+    }
 
     const voted=det.voted;
     if(!voted||voted===SKIP){
