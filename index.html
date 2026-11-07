@@ -7,11 +7,23 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px;scroll-behavior:smooth}
-body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f5f0f0;color:#2d3436;min-height:100dvh;overflow-x:hidden;-webkit-text-size-adjust:100%}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:linear-gradient(180deg,#2a7bc8 0%,#1a5a9e 40%,#164d8a 100%);color:#2d3436;min-height:100dvh;overflow-x:hidden;-webkit-text-size-adjust:100%}
 
 /* ===== SCREENS ===== */
 .screen{display:none;min-height:100dvh;padding:12px 16px;animation:fadeIn .4s ease}
 .screen.active{display:flex;flex-direction:column;align-items:center}
+#s-home.active{display:block}
+
+/* ===== INFOGRAPHIC SECTIONS ===== */
+.section{max-width:600px;margin:0 auto 18px;width:100%}
+.section-title{text-align:center;margin:24px 0 12px;position:relative}
+.section-title h2{font-family:'Segoe Script','Brush Script MT','Dancing Script',cursive;font-size:1.7rem;color:#fff;font-weight:400;text-shadow:0 2px 8px rgba(0,0,0,.2)}
+.section-title .subtitle{font-size:.72rem;color:rgba(255,255,255,.85);text-transform:uppercase;letter-spacing:2px;margin-top:2px}
+.section-card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 4px 24px rgba(0,0,0,.12);position:relative}
+.section-card h3{color:#1a5a9e;font-size:1rem;font-weight:700;margin-bottom:10px;text-align:center}
+.heart-deco{position:absolute;font-size:1.2rem;opacity:.15;color:#c41e2a}
+.heart-deco.tl{top:-8px;left:-4px}.heart-deco.tr{top:-8px;right:-4px}
+.heart-deco.bl{bottom:-8px;left:-4px}.heart-deco.br{bottom:-8px;right:-4px}
 @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 
 /* ===== BUTTONS ===== */
@@ -20,26 +32,46 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f5f0f
 .btn-primary{background:linear-gradient(135deg,#c41e2a,#d94452);color:#fff;box-shadow:0 4px 15px rgba(196,30,42,.3)}
 .btn-primary:hover{box-shadow:0 6px 20px rgba(196,30,42,.4);transform:translateY(-2px)}
 .btn-primary:disabled{background:#adb5bd;box-shadow:none;cursor:not-allowed;transform:none}
-.btn-secondary{background:#fff;color:#c41e2a;border:2px solid #c41e2a}
-.btn-secondary:hover{background:#fff5f5}
+.btn-secondary{background:#fff;color:#1a5a9e;border:2px solid #1a5a9e}
+.btn-secondary:hover{background:#e8f0fe}
+.btn-cta{background:linear-gradient(135deg,#27ae60,#2ecc71);color:#fff;box-shadow:0 4px 15px rgba(39,174,96,.4);font-size:1.15rem;padding:14px 36px;border-radius:14px;border:none;width:100%;max-width:400px}
+.btn-cta:hover{box-shadow:0 6px 22px rgba(39,174,96,.5);transform:translateY(-2px)}
 .btn-danger{background:#e63946;color:#fff}
 .btn-small{padding:8px 16px;font-size:.85rem;border-radius:8px}
-.btn-back{background:none;color:#6c757d;padding:8px 12px;border-radius:8px;border:none;cursor:pointer;font-family:inherit;font-size:.9rem}
-.btn-back:hover{background:rgba(0,0,0,.05)}
+.btn-back{background:rgba(255,255,255,.2);color:#fff;padding:8px 12px;border-radius:8px;border:none;cursor:pointer;font-family:inherit;font-size:.9rem}
+.btn-back:hover{background:rgba(255,255,255,.35)}
 .btn-group{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:10px;width:100%}
 
 .container{width:100%;max-width:960px;padding:0 4px}
-.card{background:#fff;border-radius:14px;padding:16px;box-shadow:0 4px 20px rgba(0,0,0,.07)}
+.card{background:#fff;border-radius:14px;padding:16px;box-shadow:0 4px 20px rgba(0,0,0,.12)}
 
 /* ===== HOME ===== */
-.hero{text-align:center;padding:16px 20px 8px}
-.hero h1{font-size:1.8rem;color:#8b1520;margin-bottom:2px}
-.hero p{color:#6c757d;font-size:.9rem}
-.live-stats{display:flex;gap:12px;justify-content:center;margin:8px 0;flex-wrap:wrap}
-.stat{text-align:center;padding:8px 16px;background:#fff;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,.06);min-width:100px}
+.hero{text-align:center;padding:20px 20px 8px}
+.hero h1{font-family:'Segoe Script','Brush Script MT','Dancing Script',cursive;font-size:2rem;color:#c41e2a;margin-bottom:2px;text-shadow:0 2px 8px rgba(0,0,0,.08)}
+.hero .h1-line2{font-size:2.4rem;display:block;margin-top:-4px}
+.hero p{color:rgba(255,255,255,.9);font-size:.88rem}
+.hero .tagline{font-size:.72rem;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:2px;margin-top:4px}
+.live-stats{display:flex;gap:12px;justify-content:center;margin:12px 0;flex-wrap:wrap}
+.stat{text-align:center;padding:10px 18px;background:rgba(255,255,255,.95);border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,.1);min-width:100px}
 .stat .val{font-size:1.4rem;font-weight:800;color:#c41e2a}
 .stat .lbl{font-size:.7rem;color:#6c757d;margin-top:1px}
-.rules{max-width:500px;width:100%;margin:0 auto 8px}
+
+/* Home sections */
+.intro-card{background:#fff;border-radius:16px;padding:18px;box-shadow:0 4px 20px rgba(0,0,0,.1);text-align:center}
+.intro-card h3{color:#1a5a9e;font-size:1rem;font-weight:700;margin-bottom:8px}
+.intro-card p{font-size:.85rem;color:#555;line-height:1.6}
+
+.steps-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+.step-card{background:#f8fbff;border:2px solid #e0eaf5;border-radius:12px;padding:12px;text-align:center}
+.step-card .step-num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:#1a5a9e;color:#fff;font-weight:700;font-size:.9rem;margin-bottom:6px}
+.step-card .step-title{font-size:.82rem;font-weight:700;color:#1a5a9e;margin-bottom:3px}
+.step-card .step-desc{font-size:.72rem;color:#666;line-height:1.4}
+
+.layout-info{text-align:center;margin:12px 0;padding:10px;background:rgba(255,255,255,.15);border-radius:10px}
+.layout-info span{color:#fff;font-size:.9rem;font-weight:600}
+.layout-info b{color:#ffd700;font-size:1.1rem}
+
+.rules{max-width:600px;width:100%;margin:0 auto 8px}
 .rules h3{font-weight:600;color:#1e3a6e;font-size:.9rem;margin-bottom:6px;text-align:left}
 .rules ul{list-style:none}
 .rules li{padding:3px 0;display:flex;align-items:center;gap:8px;font-size:.85rem}
@@ -48,6 +80,30 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f5f0f
 .score-map div{background:#fff;padding:9px 5px;text-align:center;font-size:1rem}
 .score-map div b{display:block;font-size:1.25rem;color:#c41e2a}
 .score-map .me{background:#fff0f0;font-weight:700;color:#c41e2a}
+
+/* Score explanation */
+.score-explain{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;font-size:.78rem;color:#555}
+.score-explain div{background:#f8fbff;border-radius:8px;padding:8px;border-left:3px solid #1a5a9e}
+.score-explain .sc-icon{font-size:1.1rem;margin-bottom:2px;display:block}
+
+/* Prize section */
+.prize-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+.prize-item{text-align:center;padding:14px 8px;background:#f8fbff;border-radius:12px;border:2px solid #e0eaf5}
+.prize-item .prize-icon{font-size:2rem;margin-bottom:4px}
+.prize-item .prize-label{font-size:.78rem;font-weight:700;color:#1a5a9e;margin-bottom:2px}
+.prize-item .prize-desc{font-size:.68rem;color:#666;line-height:1.3}
+.prize-date{text-align:center;margin-top:12px;padding:10px;background:#fff3e0;border-radius:10px;font-size:.82rem;color:#e65100;font-weight:600}
+
+/* Tips section */
+.tips-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.tip-item{text-align:center;padding:12px 6px;background:#f0f7ff;border-radius:10px}
+.tip-item .tip-icon{font-size:1.5rem;margin-bottom:4px}
+.tip-item .tip-text{font-size:.72rem;color:#555;line-height:1.3}
+
+/* Bottom CTA */
+.cta-section{text-align:center;padding:24px 16px;margin:0 auto;max-width:600px;width:100%}
+.cta-section .cta-link{display:block;background:rgba(255,255,255,.2);border-radius:10px;padding:8px;margin-top:10px;color:#fff;font-size:.78rem;word-break:break-all}
+.footer-text{text-align:center;padding:16px;color:rgba(255,255,255,.6);font-size:.72rem;letter-spacing:1px}
 
 /* ===== CONFIG ===== */
 .config-card{max-width:560px;width:100%}
@@ -213,7 +269,8 @@ body.dragging{overflow:hidden;touch-action:none;user-select:none;-webkit-user-se
   .grid{--sw:48px;--sh:40px;--g:3px;--aw:14px}
   .cell .nm{font-size:.5rem}
   .cell .num{font-size:.6rem}
-  .hero h1{font-size:1.5rem}
+  .hero h1{font-size:1.6rem}
+  .hero .h1-line2{font-size:2rem}
   .hero p{font-size:.82rem}
   .r3x3{max-width:300px;gap:4px}
   .r-cell{padding:8px 4px}
@@ -238,6 +295,11 @@ body.dragging{overflow:hidden;touch-action:none;user-select:none;-webkit-user-se
   .popup{padding:20px;width:92%}
   .lb-table th,.lb-table td{padding:8px 6px;font-size:.8rem}
   .lb-table .dt{font-size:.7rem}
+  .section-title h2{font-size:1.4rem}
+  .steps-grid{gap:8px}
+  .step-card{padding:10px}
+  .tips-grid{gap:6px}
+  .prize-grid{gap:8px}
 }
 
 /* Phone standard (375-420px) */
@@ -249,9 +311,11 @@ body.dragging{overflow:hidden;touch-action:none;user-select:none;-webkit-user-se
   .cell-nb .badge{font-size:.5rem;padding:1px 3px}
   .hero{padding:10px 10px 6px}
   .hero h1{font-size:1.3rem}
+  .hero .h1-line2{font-size:1.6rem}
   .hero p{font-size:.78rem}
   .hero img{width:70px!important}
   .card{padding:12px}
+  .section-card{padding:14px}
   .rules{margin-bottom:6px}
   .rules h3{font-size:.82rem}
   .rules li{font-size:.78rem;padding:2px 0}
@@ -264,6 +328,7 @@ body.dragging{overflow:hidden;touch-action:none;user-select:none;-webkit-user-se
   .stat .val{font-size:1.1rem}
   .stat .lbl{font-size:.6rem}
   .btn{padding:8px 14px;font-size:.82rem;border-radius:10px}
+  .btn-cta{font-size:1rem;padding:12px 24px}
   .btn-group{gap:6px}
   .btn-back{font-size:.8rem;padding:6px 8px}
   .tag{padding:5px 8px;font-size:.72rem;border-radius:8px;border-width:1.5px}
@@ -299,6 +364,24 @@ body.dragging{overflow:hidden;touch-action:none;user-select:none;-webkit-user-se
   .name-card h3{font-size:.95rem}
   .name-card p{font-size:.8rem}
   .name-input-wrap input{padding:10px 14px;font-size:.92rem}
+  .section-title h2{font-size:1.2rem}
+  .steps-grid{grid-template-columns:1fr 1fr;gap:6px}
+  .step-card{padding:8px}
+  .step-card .step-num{width:24px;height:24px;font-size:.75rem}
+  .step-card .step-title{font-size:.72rem}
+  .step-card .step-desc{font-size:.65rem}
+  .tips-grid{grid-template-columns:1fr 1fr 1fr;gap:4px}
+  .tip-item{padding:8px 4px}
+  .tip-item .tip-icon{font-size:1.2rem}
+  .tip-item .tip-text{font-size:.62rem}
+  .prize-grid{gap:6px}
+  .prize-item{padding:10px 6px}
+  .prize-item .prize-icon{font-size:1.5rem}
+  .prize-item .prize-label{font-size:.7rem}
+  .prize-item .prize-desc{font-size:.6rem}
+  .layout-info span{font-size:.78rem}
+  .layout-info b{font-size:.95rem}
+  .score-explain{font-size:.68rem;gap:6px}
 }
 
 /* Small phones (320-374px) */
@@ -335,45 +418,173 @@ body.dragging{overflow:hidden;touch-action:none;user-select:none;-webkit-user-se
 
 <!-- ===== HOME ===== -->
 <div id="s-home" class="screen">
+  <!-- Hero Header -->
   <div class="hero">
-    <img src="logo.jpg" alt="Logo 30 năm Lớp 12D" style="width:90px;height:auto;border-radius:12px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.12))">
-    <h1>Tìm Về Góc Bàn Xưa</h1>
-    <p>Lớp 12D Chi Lăng - Đà Lạt · Một thời và mãi mãi</p>
+    <img src="logo.jpg" alt="Logo 30 năm Lớp 12D" style="width:90px;height:auto;border-radius:12px;filter:drop-shadow(0 4px 12px rgba(0,0,0,.25))">
+    <h1>Tìm Về<span class="h1-line2">Góc Bàn Xưa</span></h1>
+    <p>Lớp 12D Chi Lăng – Đà Lạt · 1996 – 2026</p>
+    <div class="tagline">TRÒ CHƠI ĐỂ LẠI KỶ NIỆM – HỘI LỚP 30 NĂM</div>
   </div>
+
+  <!-- Live Stats -->
   <div class="live-stats" id="homeStats">
     <div class="stat"><div class="val" id="statPlayers">—</div><div class="lbl">Bạn đã chơi</div></div>
     <div class="stat"><div class="val" id="statSeats">—</div><div class="lbl">Ghế đã xác định</div></div>
     <div class="stat"><div class="val" id="statConf">—</div><div class="lbl">Độ chính xác</div></div>
   </div>
-  <div class="card rules">
-    <h3>📜 Cách Chơi Mới</h3>
-    <ul>
-      <li><span class="ic">👤</span> Nhập tên bạn, <strong>chọn chỗ ngồi</strong> của mình</li>
-      <li><span class="ic">✋</span> <strong>Kéo thả</strong> tên bạn bè vào 8 chỗ xung quanh</li>
-      <li><span class="ic">🤝</span> Nhiều bạn cùng chọn đúng → <strong>tăng độ chính xác</strong></li>
-      <li><span class="ic">🗺️</span> Cùng hoàn thiện sơ đồ lớp mình tốt nhất!</li>
-    </ul>
-    <div class="score-map">
-      <div><b>3đ</b>↖️</div><div><b>2đ</b>⬆️</div><div><b>3đ</b>↗️</div>
-      <div><b>1đ</b>⬅️</div><div class="me">BẠN<br>★</div><div><b>1đ</b>➡️</div>
-      <div><b>3đ</b>↙️</div><div><b>2đ</b>⬇️</div><div><b>3đ</b>↘️</div>
+
+  <!-- Section: Ai còn nhớ -->
+  <div class="section">
+    <div class="intro-card">
+      <h3>AI CÒN NHỚ MÌNH NGỒI Ở ĐÂU? BẠN BÈ XUNG QUANH LÀ AI?</h3>
+      <p>Cùng nhau tái tạo lại lớp học thân yêu ngày ấy! "Tìm Về Góc Bàn Xưa" là trò chơi trí nhớ cộng đồng — mỗi bạn chọn chỗ ngồi của mình, điền tên bạn bè xung quanh. Càng nhiều bạn chơi, sơ đồ lớp càng chính xác!</p>
     </div>
   </div>
-  <div class="btn-group">
-    <button class="btn btn-primary" id="btnPlay" onclick="go('game')">🎮 Chơi Ngay</button>
-    <button class="btn btn-secondary" onclick="go('consensus')">🗺️ Sơ Đồ Lớp</button>
-    <button class="btn btn-secondary" onclick="go('lb')">🏆 Xếp Hạng</button>
+
+  <!-- Section: Cách chơi -->
+  <div class="section">
+    <div class="section-title">
+      <h2>Cách chơi</h2>
+      <div class="subtitle">VỪA ĐƠN GIẢN – CHỈ 4 BƯỚC</div>
+    </div>
+    <div class="section-card">
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <div class="step-title">NHẬP TÊN BẠN</div>
+          <div class="step-desc">Gõ tên của bạn (gợi ý từ DS lớp)</div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <div class="step-title">CHỌN CHỖ NGỒI CỦA MÌNH</div>
+          <div class="step-desc">Nhấn vào ghế mà bạn ngồi năm xưa trên sơ đồ</div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <div class="step-title">ĐIỀN BẠN BÈ XUNG QUANH</div>
+          <div class="step-desc">Kéo thả / nhấn tên bạn bè vào 8 ô xung quanh</div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">4</div>
+          <div class="step-title">BẤM "NỘP BÀI"</div>
+          <div class="step-desc">Hệ thống so sánh & chấm điểm tự động</div>
+        </div>
+      </div>
+      <div class="layout-info" style="margin-top:14px;background:#e8f0fe;border-radius:10px;padding:10px">
+        <span style="color:#1a5a9e">Sơ đồ lớp: <b style="color:#c41e2a">2</b> dãy × <b style="color:#c41e2a">6</b> hàng × <b style="color:#c41e2a">4</b> ghế = <b style="color:#c41e2a">48</b> chỗ</span>
+      </div>
+    </div>
   </div>
-  <div style="margin-top:4px">
-    <button class="btn-back" onclick="go('config')">⚙️ Cấu hình API</button>
+
+  <!-- Section: Cách tính điểm -->
+  <div class="section">
+    <div class="section-title">
+      <h2>Cách tính điểm</h2>
+      <div class="subtitle">CÔNG BẰNG CHO MỌI VỊ TRÍ</div>
+    </div>
+    <div class="section-card">
+      <div class="score-map">
+        <div><b>3đ</b>↖️</div><div><b>2đ</b>⬆️</div><div><b>3đ</b>↗️</div>
+        <div><b>1đ</b>⬅️</div><div class="me">BẠN<br>★</div><div><b>1đ</b>➡️</div>
+        <div><b>3đ</b>↙️</div><div><b>2đ</b>⬇️</div><div><b>3đ</b>↘️</div>
+      </div>
+      <div class="score-explain" style="margin-top:14px">
+        <div><span class="sc-icon">🎯</span> <b>Đúng:</b> Cộng điểm theo vị trí (1đ, 2đ, 3đ)</div>
+        <div><span class="sc-icon">📊</span> <b>Tỷ lệ / Quy đổi:</b> Quy đổi tỷ lệ ra thang 18 điểm max</div>
+        <div><span class="sc-icon">🧱</span> <b>Tường / Bảng:</b> Vị trí biên tự động — không tính điểm</div>
+        <div><span class="sc-icon">🎁</span> <b>Bonus +1đ:</b> Khi tạo đồng thuận mới (2 bạn cùng chọn)</div>
+      </div>
+    </div>
   </div>
+
+  <!-- Section: Sơ đồ thanh xuân -->
+  <div class="section">
+    <div class="section-title">
+      <h2>Sơ đồ thanh xuân</h2>
+      <div class="subtitle">LỚP MÌNH NĂM ẤY</div>
+    </div>
+    <div class="section-card">
+      <p style="font-size:.82rem;color:#555;text-align:center;margin-bottom:12px">Bản đồ lớp được xây dựng từ ký ức chung của cả lớp. Nhấn vào ô để xem chi tiết.</p>
+      <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;font-size:.78rem;margin-bottom:8px">
+        <span>🟢 ≥80% đồng thuận (xanh)</span>
+        <span>🟡 50-79%</span>
+        <span>🟠 30-49%</span>
+        <span>🔴 <30%</span>
+      </div>
+      <p style="font-size:.88rem;font-weight:700;color:#1a5a9e;text-align:center;margin-top:8px">CÀNG NHIỀU BẠN CHƠI → SƠ ĐỒ CÀNG CHÍNH XÁC!</p>
+    </div>
+  </div>
+
+  <!-- Section: Trao giải -->
+  <div class="section">
+    <div class="section-title">
+      <h2>Trao giải</h2>
+      <div class="subtitle">THỬ XEM AI SIÊU PHẨM NHẤT LỚP?</div>
+    </div>
+    <div class="section-card">
+      <div class="prize-grid">
+        <div class="prize-item">
+          <div class="prize-icon">🏆</div>
+          <div class="prize-label">GIẢI CAO</div>
+          <div class="prize-desc">Top 3 điểm cao nhất</div>
+        </div>
+        <div class="prize-item">
+          <div class="prize-icon">⏰</div>
+          <div class="prize-label">HẠN CUỐI</div>
+          <div class="prize-desc">Trước ngày 14/11/2026</div>
+        </div>
+        <div class="prize-item">
+          <div class="prize-icon">🤣</div>
+          <div class="prize-label">TRÍ NHỚ CÁ VÀNG</div>
+          <div class="prize-desc">Giải vui cho bạn điểm thấp nhất</div>
+        </div>
+        <div class="prize-item">
+          <div class="prize-icon">🏠</div>
+          <div class="prize-label">NHỚ NHỚ BẠN XƯA</div>
+          <div class="prize-desc">Giải cho bạn tạo nhiều đồng thuận nhất</div>
+        </div>
+      </div>
+      <div class="prize-date">🎉 Trao giải tại tiệc hội lớp ngày <b>14/11/2026</b></div>
+    </div>
+  </div>
+
+  <!-- Section: Mẹo nhỏ -->
+  <div class="section">
+    <div class="section-title">
+      <h2>Mẹo nhỏ</h2>
+      <div class="subtitle">ĐỂ ĐẠT ĐIỂM CAO</div>
+    </div>
+    <div class="section-card">
+      <div class="tips-grid">
+        <div class="tip-item"><div class="tip-icon">🧘</div><div class="tip-text">Chill lại nghĩ kỹ, đừng vội vàng</div></div>
+        <div class="tip-item"><div class="tip-icon">📸</div><div class="tip-text">Thử nhớ qua ảnh cũ / liên hoan lớp</div></div>
+        <div class="tip-item"><div class="tip-icon">📞</div><div class="tip-text">Rủ bạn bè cùng chơi để xác nhận kí ức</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="cta-section">
+    <button class="btn btn-cta" id="btnPlay" onclick="go('game')">🎮 Chơi Ngay!</button>
+    <div style="display:flex;gap:10px;justify-content:center;margin-top:12px">
+      <button class="btn btn-secondary" onclick="go('consensus')">🗺️ Sơ Đồ Lớp</button>
+      <button class="btn btn-secondary" onclick="go('lb')">🏆 Xếp Hạng</button>
+    </div>
+    <div class="cta-link">https://tridalat-lab.github.io/nho-cho-ngoi</div>
+    <div style="margin-top:8px">
+      <button class="btn-back" onclick="go('config')" style="color:rgba(255,255,255,.6);font-size:.75rem">⚙️ Cấu hình API</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer-text">Lớp 12D Chi Lăng – Đà Lạt · Một thời và mãi mãi</div>
 </div>
 
 <!-- ===== CONFIG ===== -->
 <div id="s-config" class="screen">
   <div class="container" style="max-width:600px">
     <button class="btn-back" onclick="go('home')">← Quay lại</button>
-    <h2 style="margin-top:8px">⚙️ Cấu Hình Google Sheets</h2>
+    <h2 style="margin-top:8px;color:#fff">⚙️ Cấu Hình Google Sheets</h2>
     <div class="card config-card" style="margin-top:16px">
       <h3>📋 Hướng Dẫn</h3>
       <ol style="font-size:.9rem;line-height:1.8;padding-left:20px;color:#495057">
@@ -473,7 +684,7 @@ body.dragging{overflow:hidden;touch-action:none;user-select:none;-webkit-user-se
 <!-- ===== RESULT ===== -->
 <div id="s-result" class="screen">
   <div class="container" style="max-width:560px">
-    <h2>📊 Kết Quả</h2>
+    <h2 style="color:#fff">📊 Kết Quả</h2>
     <div class="card result-score" id="resScore"></div>
     <div class="r3x3" id="resGrid"></div>
     <div class="btn-group">
@@ -488,9 +699,9 @@ body.dragging{overflow:hidden;touch-action:none;user-select:none;-webkit-user-se
 <div id="s-consensus" class="screen">
   <div class="container">
     <button class="btn-back" onclick="go('home')">← Quay lại</button>
-    <h2 style="text-align:center;color:#1e3a6e">🗺️ Sơ đồ thanh xuân – Lớp mình năm ấy</h2>
-    <p style="text-align:center;color:#6c757d;margin-bottom:12px;font-size:.9rem" id="conSubtitle"></p>
-    <div id="conLegend" style="display:flex;gap:12px;justify-content:center;margin-bottom:14px;flex-wrap:wrap;font-size:.78rem">
+    <h2 style="text-align:center;color:#fff">🗺️ Sơ đồ thanh xuân – Lớp mình năm ấy</h2>
+    <p style="text-align:center;color:rgba(255,255,255,.8);margin-bottom:12px;font-size:.9rem" id="conSubtitle"></p>
+    <div id="conLegend" style="display:flex;gap:12px;justify-content:center;margin-bottom:14px;flex-wrap:wrap;font-size:.78rem;color:rgba(255,255,255,.9)">
       <span>🟢 ≥80%</span><span>🟡 50-79%</span><span>🟠 30-49%</span><span>🔴 <30%</span><span>⚪ Chưa có</span>
     </div>
     <div class="grid-area">
@@ -514,7 +725,7 @@ body.dragging{overflow:hidden;touch-action:none;user-select:none;-webkit-user-se
 <div id="s-lb" class="screen">
   <div class="container" style="max-width:650px">
     <button class="btn-back" onclick="go('home')">← Quay lại</button>
-    <h2>🏆 Bảng Xếp Hạng</h2>
+    <h2 style="color:#fff">🏆 Bảng Xếp Hạng</h2>
     <div class="card" id="lbBox"></div>
     <div id="lbLoading" class="loading-wrap" style="display:none"><div class="spinner"></div><p>Đang tải...</p></div>
   </div>
@@ -635,7 +846,7 @@ function go(s){
    ============================================================ */
 async function initHome(){
   document.getElementById('btnPlay').disabled=!CFG.url;
-  document.getElementById('btnPlay').textContent=CFG.url?'🎮 Chơi Ngay':'🎮 Cấu hình API trước';
+  document.getElementById('btnPlay').textContent=CFG.url?'🎮 Chơi Ngay!':'🎮 Cấu hình API trước';
   if(!CFG.url)return;
   try{
     const d=await apiGet('consensus');
