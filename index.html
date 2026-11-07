@@ -735,7 +735,7 @@ function renderSeatGrid(){
       const el=document.createElement('div');el.className='cell';
       el.style.gridRow=r+1;el.style.gridColumn=c<4?c+1:c+2;
       const d=dn(r,c);
-      if(d&&d<=44){
+      if(d&&d<=48){
         el.classList.add('cell-seat');
         el.innerHTML=`<span class="num">${d}</span>`;
         el.onclick=()=>selectSeat(r,c,d);
@@ -1089,7 +1089,7 @@ function renderConGrid(data){
       const el=document.createElement('div');el.className='cell';
       el.style.gridRow=r+1;el.style.gridColumn=c<4?c+1:c+2;
       const d=dn(r,c);
-      if(!d||d>44){el.classList.add('cell-empty');el.innerHTML=`<span class="num">${d||'✕'}</span>`;gg.appendChild(el);continue}
+      if(!d||d>48){el.classList.add('cell-empty');el.innerHTML=`<span class="num">${d||'✕'}</span>`;gg.appendChild(el);continue}
 
       const s=seats[d]||{name:null,confidence:0,total:0};
       el.classList.add('cell-con');
