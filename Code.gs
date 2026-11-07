@@ -101,6 +101,8 @@ function submitVotes(data) {
       return;
     }
     if (!v.votedName || v.votedName === SKIP) {
+      var skipPts = v.points || 1;
+      rawMax += skipPts; // SKIP counts as wrong answer — adds to max but scores 0
       details.push({ seat: v.targetSeat, dir: v.direction, voted: null,
                       matched: false, pts: 0, consensus: null, confidence: 0, auto: false });
       return;
