@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Nhớ Chỗ Ngồi - 12D Chi Lăng Đà Lạt</title>
+<title>Tìm Về Góc Bàn Xưa - 12D Chi Lăng Đà Lạt</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px;scroll-behavior:smooth}
@@ -74,6 +74,8 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f5f0f
 .board-tag,.wall-tag{font-size:.8rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:7px 22px;border-radius:8px;display:block;width:fit-content;margin:6px auto}
 .board-tag{background:#1e3a6e;color:#fff}
 .wall-tag{background:#795548;color:#fff}
+.board-row{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:2px}
+.teacher-desk{font-size:.7rem;font-weight:600;color:#1e3a6e;background:#e8edf5;border:2px solid #1e3a6e;border-radius:8px;padding:4px 10px;white-space:nowrap;display:flex;align-items:center;gap:4px}
 .grid-with-sides{display:flex;align-items:center;justify-content:center;gap:6px;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
 .side-tag{writing-mode:vertical-rl;font-size:.7rem;font-weight:700;letter-spacing:2px;padding:12px 7px;border-radius:8px;color:#fff;white-space:nowrap}
 .door-tag{background:#795548}
@@ -223,6 +225,8 @@ body.dragging{overflow:hidden;touch-action:none;user-select:none;-webkit-user-se
   .stat .lbl{font-size:.65rem}
   .board-tag,.wall-tag{font-size:.7rem;padding:5px 16px;letter-spacing:2px}
   .side-tag{font-size:.6rem;padding:10px 5px;letter-spacing:1px}
+  .teacher-desk{font-size:.6rem;padding:3px 7px}
+  .board-row{gap:8px}
   .day-lbl{font-size:.6rem}
   .score-map{max-width:260px}
   .score-map div{padding:7px 3px;font-size:.85rem}
@@ -267,6 +271,8 @@ body.dragging{overflow:hidden;touch-action:none;user-select:none;-webkit-user-se
   .bank-search{padding:8px 10px;font-size:.82rem}
   .board-tag,.wall-tag{font-size:.65rem;padding:4px 12px;letter-spacing:1.5px;border-radius:6px}
   .side-tag{font-size:.55rem;padding:8px 4px;letter-spacing:1px;border-radius:6px}
+  .teacher-desk{font-size:.55rem;padding:2px 6px;border-radius:6px}
+  .board-row{gap:6px}
   .day-lbl{font-size:.55rem;letter-spacing:0}
   .steps{gap:4px;margin-bottom:10px}
   .step{padding:5px 10px;font-size:.75rem}
@@ -331,11 +337,11 @@ body.dragging{overflow:hidden;touch-action:none;user-select:none;-webkit-user-se
 <div id="s-home" class="screen">
   <div class="hero">
     <img src="logo.jpg" alt="Logo 30 năm Lớp 12D" style="width:90px;height:auto;border-radius:12px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.12))">
-    <h1>Nhớ Chỗ Ngồi</h1>
+    <h1>Tìm Về Góc Bàn Xưa</h1>
     <p>Lớp 12D Chi Lăng - Đà Lạt · Một thời và mãi mãi</p>
   </div>
   <div class="live-stats" id="homeStats">
-    <div class="stat"><div class="val" id="statPlayers">—</div><div class="lbl">Người đã chơi</div></div>
+    <div class="stat"><div class="val" id="statPlayers">—</div><div class="lbl">Bạn đã chơi</div></div>
     <div class="stat"><div class="val" id="statSeats">—</div><div class="lbl">Ghế đã xác định</div></div>
     <div class="stat"><div class="val" id="statConf">—</div><div class="lbl">Độ chính xác</div></div>
   </div>
@@ -344,8 +350,8 @@ body.dragging{overflow:hidden;touch-action:none;user-select:none;-webkit-user-se
     <ul>
       <li><span class="ic">👤</span> Nhập tên bạn, <strong>chọn chỗ ngồi</strong> của mình</li>
       <li><span class="ic">✋</span> <strong>Kéo thả</strong> tên bạn bè vào 8 chỗ xung quanh</li>
-      <li><span class="ic">🤝</span> Nhiều người cùng chọn đúng → <strong>tăng độ chính xác</strong></li>
-      <li><span class="ic">🗺️</span> Cùng hoàn thiện sơ đồ lớp tốt nhất!</li>
+      <li><span class="ic">🤝</span> Nhiều bạn cùng chọn đúng → <strong>tăng độ chính xác</strong></li>
+      <li><span class="ic">🗺️</span> Cùng hoàn thiện sơ đồ lớp mình tốt nhất!</li>
     </ul>
     <div class="score-map">
       <div><b>3đ</b>↖️</div><div><b>2đ</b>⬆️</div><div><b>3đ</b>↗️</div>
@@ -355,7 +361,7 @@ body.dragging{overflow:hidden;touch-action:none;user-select:none;-webkit-user-se
   </div>
   <div class="btn-group">
     <button class="btn btn-primary" id="btnPlay" onclick="go('game')">🎮 Chơi Ngay</button>
-    <button class="btn btn-secondary" onclick="go('consensus')">🗺️ Sơ Đồ</button>
+    <button class="btn btn-secondary" onclick="go('consensus')">🗺️ Sơ Đồ Lớp</button>
     <button class="btn btn-secondary" onclick="go('lb')">🏆 Xếp Hạng</button>
   </div>
   <div style="margin-top:4px">
@@ -413,7 +419,10 @@ body.dragging{overflow:hidden;touch-action:none;user-select:none;-webkit-user-se
     <!-- Step 2: Select seat -->
     <div id="seatStep" style="display:none">
       <div class="grid-area">
-        <div class="board-tag">📋 Bảng</div>
+        <div class="board-row">
+          <div class="board-tag">📋 BẢNG</div>
+          <div class="teacher-desk">🧑‍🏫 Bàn GV</div>
+        </div>
         <div class="day-row"><div class="day-lbl">Dãy 1</div><div class="day-lbl">Dãy 2</div></div>
         <div class="grid-with-sides">
           <div class="side-tag door-tag">🚪 Cửa Ra Vào</div>
@@ -427,7 +436,10 @@ body.dragging{overflow:hidden;touch-action:none;user-select:none;-webkit-user-se
     <!-- Step 3: Fill neighbors -->
     <div id="fillStep" style="display:none">
       <div class="grid-area">
-        <div class="board-tag">📋 Bảng</div>
+        <div class="board-row">
+          <div class="board-tag">📋 BẢNG</div>
+          <div class="teacher-desk">🧑‍🏫 Bàn GV</div>
+        </div>
         <div class="day-row"><div class="day-lbl">Dãy 1</div><div class="day-lbl">Dãy 2</div></div>
         <div class="grid-with-sides">
           <div class="side-tag door-tag">🚪 Cửa Ra Vào</div>
@@ -466,7 +478,7 @@ body.dragging{overflow:hidden;touch-action:none;user-select:none;-webkit-user-se
     <div class="r3x3" id="resGrid"></div>
     <div class="btn-group">
       <button class="btn btn-secondary" onclick="go('game')">🔄 Chơi Lại</button>
-      <button class="btn btn-primary" onclick="go('consensus')">🗺️ Xem Sơ Đồ</button>
+      <button class="btn btn-primary" onclick="go('consensus')">🗺️ Xem Sơ Đồ Lớp</button>
       <button class="btn btn-secondary" onclick="go('lb')">🏆 Xếp Hạng</button>
     </div>
   </div>
@@ -476,13 +488,16 @@ body.dragging{overflow:hidden;touch-action:none;user-select:none;-webkit-user-se
 <div id="s-consensus" class="screen">
   <div class="container">
     <button class="btn-back" onclick="go('home')">← Quay lại</button>
-    <h2 style="text-align:center">🗺️ Sơ Đồ Đồng Thuận</h2>
+    <h2 style="text-align:center;color:#1e3a6e">🗺️ Sơ đồ thanh xuân – Lớp mình năm ấy</h2>
     <p style="text-align:center;color:#6c757d;margin-bottom:12px;font-size:.9rem" id="conSubtitle"></p>
     <div id="conLegend" style="display:flex;gap:12px;justify-content:center;margin-bottom:14px;flex-wrap:wrap;font-size:.78rem">
       <span>🟢 ≥80%</span><span>🟡 50-79%</span><span>🟠 30-49%</span><span>🔴 <30%</span><span>⚪ Chưa có</span>
     </div>
     <div class="grid-area">
-      <div class="board-tag">📋 Bảng</div>
+      <div class="board-row">
+        <div class="board-tag">📋 BẢNG</div>
+        <div class="teacher-desk">🧑‍🏫 Bàn GV</div>
+      </div>
       <div class="day-row"><div class="day-lbl">Dãy 1</div><div class="day-lbl">Dãy 2</div></div>
       <div class="grid-with-sides">
         <div class="side-tag door-tag">🚪 Cửa Ra Vào</div>
@@ -1057,7 +1072,7 @@ async function initConsensus(){
     conCache=d;
     loading.style.display='none';
     document.getElementById('conSubtitle').textContent=
-      `${d.totalPlayers||0} người đã chơi · ${d.filledSeats||0}/48 ghế có dữ liệu`;
+      `${d.totalPlayers||0} bạn đã chơi · ${d.filledSeats||0}/48 ghế có dữ liệu`;
     renderConGrid(d);
   }catch(e){
     loading.innerHTML=`<p style="color:#e63946">❌ Lỗi: ${e.message}</p>`;
